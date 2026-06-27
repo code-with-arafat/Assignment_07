@@ -1,31 +1,31 @@
-import { Children, StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './index.css';
+import MainLayout from './layout/MainLayout';
+import NotFound from './pages/notFound/NotFound';
 import HomePage from './pages/homePage/HomePage'
-import MainLayout from './layout/MainLayout'
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    Component: MainLayout ,
-    Children: [
+    path: '/',
+    element: <MainLayout />,
+    children: [
       {
-        index: true,
-        element: <HomePage/>
-
+        path: '/',
+        element: <HomePage />,
       },
+      // Others page path here
+    ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
 
-      
-
-    ]
-  }
-])
-
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    
-    <RouterProvider router={router}/>
-  </StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>,
+);
