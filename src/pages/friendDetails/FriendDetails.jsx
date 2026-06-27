@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaPhoneAlt, FaCommentAlt, FaVideo, FaRegClock, FaArchive, FaTrashAlt } from 'react-icons/fa';
+import toast, { Toaster } from 'react-hot-toast';
 import friendsData from '../../data/friends.json';
 import Nav from '../../components/shared/navber/Nav';
 import Footer from '../../components/shared/footer/Footer';
@@ -35,6 +36,63 @@ const FriendDetails = () => {
     }
   };
 
+  // 📝 ধাপ ৫.১ ও ৫.২: কুইক চেক-ইন হ্যান্ডলার ও লোকাল স্টোরেজ লজিক
+  const handleCheckIn = (actionType) => {
+    if (!friend) return;
+
+    let actionTitle = '';
+    let successMessage = '';
+
+    // বর্তমান তারিখ জেনারেট করা (২০২৬ সালের বর্তমান সময় অনুযায়ী)
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+
+    if (actionType === 'call') {
+      actionTitle = `Called ${friend.name}`;
+      successMessage = `Call logged successfully for ${friend.name}!`;
+    } else if (actionType === 'text') {
+      actionTitle = `Sent text to ${friend.name}`;
+      successMessage = `Text logged successfully for ${friend.name}!`;
+    } else if (actionType === 'video') {
+      actionTitle = `Video call with ${friend.name}`;
+      successMessage = `Video call logged successfully for ${friend.name}!`;
+    }
+
+    // নতুন টাইমলাইন অবজেক্ট তৈরি
+    const newTimelineEntry = {
+      id: Date.now(), // ইউনিক আইডি
+      friendId: friend.id,
+      action: actionTitle,
+      date: currentDate,
+      timestamp: new Date().toISOString(),
+    };
+
+    // লোকাল স্টোরেজ বা স্টেট থেকে পূর্ববর্তী টাইমলাইন ডাটা নেওয়া
+    const existingTimeline = JSON.parse(localStorage.getItem('timeline_logs')) || [];
+    
+    // নতুন ডাটা যোগ করে লোকাল স্টোরেজে সেভ করা
+    const updatedTimeline = [newTimelineEntry, ...existingTimeline];
+    localStorage.setItem('timeline_logs', JSON.stringify(updatedTimeline));
+
+    // 5.1 টোস্ট নোটিফিকেশন পপ-আপ দেখানো
+    toast.success(successMessage, {
+      style: {
+        background: '#1B4332',
+        color: '#fff',
+        borderRadius: '12px',
+        fontWeight: '500',
+        fontSize: '14px',
+      },
+      iconTheme: {
+        primary: '#DCFCE7',
+        secondary: '#1B4332',
+      },
+    });
+  };
+
   if (loading) {
     return (
       <div className="min-h-[50vh] flex flex-col justify-center items-center bg-[#F8FAFC]">
@@ -60,6 +118,9 @@ const FriendDetails = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
+      {/* টোস্ট নোটিফিকেশন রেন্ডার করার জন্য */}
+      <Toaster position="top-center" reverseOrder={false} />
+
       {/* ন্যাভবার ফুল উইডথ কন্টেইনার */}
       <div className="w-full bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -152,15 +213,24 @@ const FriendDetails = () => {
             <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
               <h4 className="text-base font-bold text-slate-900 mb-4">Quick Check-In</h4>
               <div className="grid grid-cols-3 gap-4">
-                <button className="py-6 border border-slate-100 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-slate-300 hover:bg-slate-50/50 transition-all text-slate-700">
+                <button 
+                  onClick={() => handleCheckIn('call')}
+                  className="py-6 border border-slate-100 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-slate-300 hover:bg-slate-50/50 transition-all text-slate-700 cursor-pointer"
+                >
                   <FaPhoneAlt size={22} className="text-[#1B4332]" />
                   <span className="text-xs font-medium">Call</span>
                 </button>
-                <button className="py-6 border border-slate-100 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-slate-300 hover:bg-slate-50/50 transition-all text-slate-700">
+                <button 
+                  onClick={() => handleCheckIn('text')}
+                  className="py-6 border border-slate-100 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-slate-300 hover:bg-slate-50/50 transition-all text-slate-700 cursor-pointer"
+                >
                   <FaCommentAlt size={22} className="text-[#1B4332]" />
                   <span className="text-xs font-medium">Text</span>
                 </button>
-                <button className="py-6 border border-slate-100 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-slate-300 hover:bg-slate-50/50 transition-all text-slate-700">
+                <button 
+                  onClick={() => handleCheckIn('video')}
+                  className="py-6 border border-slate-100 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-slate-300 hover:bg-slate-50/50 transition-all text-slate-700 cursor-pointer"
+                >
                   <FaVideo size={22} className="text-[#1B4332]" />
                   <span className="text-xs font-medium">Video</span>
                 </button>
