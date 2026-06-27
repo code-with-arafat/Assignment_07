@@ -7,6 +7,7 @@ import NotFound from './pages/notFound/NotFound';
 import HomePage from './pages/homePage/HomePage';
 import FriendDetails from './pages/friendDetails/FriendDetails';
 import Timeline from './pages/timeline/Timeline'; // Timeline পেজ ইম্পোর্ট করা হলো
+import Stats from './pages/stats/Stats';
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/timeline',
-        element: <Timeline />, 
+        element: <Timeline />,
       },
-      // Others page path here
+      {
+        path: '/stats',
+        element: <Stats />,
+      }
+      
     ],
   },
   {
