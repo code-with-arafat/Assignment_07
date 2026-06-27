@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FaPhoneAlt, FaCommentAlt, FaVideo, FaRegClock, FaArchive, FaTrashAlt } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
 import friendsData from '../../data/friends.json';
-import Nav from '../../components/shared/navber/Nav';
-import Footer from '../../components/shared/footer/Footer';
+
 
 const FriendDetails = () => {
   const { id } = useParams();
@@ -121,13 +120,6 @@ const FriendDetails = () => {
       {/* টোস্ট নোটিফিকেশন রেন্ডার করার জন্য */}
       <Toaster position="top-center" reverseOrder={false} />
 
-      {/* ন্যাভবার ফুল উইডথ কন্টেইনার */}
-      <div className="w-full bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Nav />
-        </div>
-      </div>
-
       {/* মেইন বডি সেকশন */}
       <div className="flex-grow w-full max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -241,10 +233,6 @@ const FriendDetails = () => {
         </div>
       </div>
 
-      {/* ফুটার সেকশন */}
-      <div className="w-full mt-auto">
-        <Footer />
-      </div>
     </div>
   );
 };
