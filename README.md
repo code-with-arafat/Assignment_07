@@ -1,16 +1,20 @@
-# React + Vite
+KeenKeeper 🤝
+আপনার ব্যক্তিগত সম্পর্কগুলোকে আরও সুন্দর ও নিবিড়ভাবে যত্ন নেওয়ার একটি চমৎকার প্ল্যাটফর্ম KeenKeeper। আমাদের ব্যস্ত জীবনে প্রিয় বন্ধুদের সাথে যোগাযোগ রাখার হিসেব রাখা বা তাদের কথা মনে রাখা অনেক সময় কঠিন হয়ে যায়। এই অ্যাপটি আপনাকে সেই সম্পর্কগুলোকে সহজে নজরে রাখতে সাহায্য করে।
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✨ মূল ফিচারসমূহ (Key Features)
+👫 ফ্রেন্ডস ড্যাশবোর্ড ও স্ট্যাটাস ট্র্যাকার: হোম পেজেই আপনি আপনার বন্ধুদের ৪-কলামের গ্রিডে দেখতে পাবেন। কার সাথে কবে যোগাযোগ হয়েছে বা কার স্ট্যাটাস কী (Overdue, Almost Due, On-track) তা এক নজরেই কালার-কোডেড ব্যাজসহ বোঝা যায়।
 
-Currently, two official plugins are available:
+⚡ কুইক চেক-ইন ও টাইমলাইন লগ: বন্ধুর প্রোফাইলে ঢুকে এক ক্লিকেই কল, টেক্সট বা ভিডিও চ্যাটের হিসেব লগ করতে পারবেন। সাথে সাথে পপ-আপ টোস্ট নোটিফিকেশন দেখাবে এবং টাইমলাইন পেজে তারিখ ও আইকনসহ সব হিস্ট্রি ক্রনোলজিক্যাল অর্ডারে জমা হয়ে যাবে।
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+📊 ফ্রেন্ডশিপ অ্যানালিটিক্স (Stats Page): আপনি বন্ধুত্বের কতটুকু সময় কোন মাধ্যমে (কল, টেক্সট নাকি ভিডিও) ব্যয় করছেন, তার একটি চমৎকার ও ইন্টারেক্টিভ ডোনাট/পাই-চার্ট দেখতে পাবেন অ্যানালিটিক্স পেজে।
 
-## React Compiler
+🛠️ ব্যবহৃত প্রযুক্তি (Technologies Used)
+React.js (ইউজার ইন্টারফেস ও কম্পোনেন্ট তৈরির জন্য)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React Router DOM (ডাইনামিক ও স্মুথ পেজ রাউটিংয়ের জন্য)
 
-## Expanding the ESLint configuration
+Recharts (অ্যানালিটিক্স পেজের চমৎকার পাই-চার্ট তৈরির জন্য)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React Hot Toast (চমৎকার নোটিফিকেশন পপ-আপের জন্য)
+
+Tailwind CSS & React Icons (স্টাইলিং ও আইকন ব্যবহারের জন্য)
